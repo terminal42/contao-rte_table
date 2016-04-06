@@ -10,19 +10,6 @@
  */
 
 /**
- * Register the namespace
- */
-ClassLoader::addNamespace('Terminal42\RteTable');
-
-/**
- * Register the classes
- */
-ClassLoader::addClasses([
-    'Terminal42\RteTable\RteEditor'      => 'system/modules/rte_table/src/RteEditor.php',
-    'Terminal42\RteTable\RteTableWizard' => 'system/modules/rte_table/src/RteTableWizard.php',
-]);
-
-/**
  * Register the templates
  */
 TemplateLoader::addFiles([

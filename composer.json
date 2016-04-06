@@ -1,0 +1,30 @@
+{
+    "name":"terminal42/rte_table",
+    "description":"Use tinyMCE (or in future maybe other Rich Text Editors) for every cell in the Contao table content element",
+    "keywords":["contao", "table", "rte", "tinymce"],
+    "type":"contao-module",
+    "license":"LGPL-3.0+",
+    "authors":[
+        {
+            "name":"terminal42 gmbh",
+            "homepage":"http://terminal42.ch"
+        }
+    ],
+    "require":{
+        "php":">=5.4.0",
+        "contao/core-bundle":"^3.5 || ^4.1",
+        "contao-community-alliance/composer-plugin":"^2.4.0 || 3.*"
+    },
+    "autoload":{
+        "psr-4":{
+            "Terminal42\\RteTable\\": "src/"
+        }
+    },
+    "extra":{
+        "contao": {
+            "sources":{
+                "": "system/modules/rte_table"
+            }
+        }
+    }
+}
