@@ -1,0 +1,54 @@
+.rte-table-wizard .rte-content {
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    padding: 5px;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.rte-table-wizard .rte-content ul {
+    list-style: initial;
+    margin: initial;
+    padding: 0 0 0 2em;
+}
+.rte-table-wizard .rte-content ul li {
+    list-style: initial;
+}
+.rte-table-wizard .tcontainer {
+    position: relative;
+}
+.rte-table-wizard .rte-edit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 1;
+    background: rgba(255,255,255,0.9);
+    text-align: center;
+    font-weight: bold;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: opacity .2s;
+    -moz-transition: opacity .2s;
+    -o-transition: opacity .2s;
+    transition: opacity .2s;
+}
+.rte-table-wizard .rte-edit:hover {
+    opacity: 1;
+}
+.rte-table-wizard .rte-edit span {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    margin-top: -5px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    transform: translateY(-50%);
+}
+.rte-table-wizard .tl_textarea {
+    display: none;
+}
