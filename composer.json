@@ -1,5 +1,5 @@
 {
-    "name":"terminal42/rte_table",
+    "name":"terminal42/contao-rte_table",
     "description":"Use tinyMCE (or in future maybe other Rich Text Editors) for every cell in the Contao table content element",
     "keywords":["contao", "table", "rte", "tinymce"],
     "type":"contao-module",
