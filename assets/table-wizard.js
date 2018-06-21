@@ -27,6 +27,10 @@ var RteTableWizard = {
 
                     frm.document.getElementById('rte-table-editor').set('value', content);
                     frm.tinyMCE.activeEditor.setContent(content);
+
+                    M.buttons.forEach(function(button) {
+                        button.classList.remove('btn-disabled');
+                    });
                 };
             }
         });

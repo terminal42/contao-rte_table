@@ -44,11 +44,21 @@
     left: 0;
     top: 50%;
     width: 100%;
-    margin-top: -5px;
     padding: 0 10px;
     box-sizing: border-box;
     transform: translateY(-50%);
 }
 .rte-table-wizard .tl_textarea {
     display: none;
+}
+
+/* Contao 4 */
+body[class*="version_4"] .rte-table-wizard .tcontainer {
+    width: 148px;
+    height: 78px;
+    vertical-align: top;
+}
+body[class*="version_4"] .rte-table-wizard .rte-content {
+    height: calc(100% - 2px);
+    margin: 2px 0;
 }

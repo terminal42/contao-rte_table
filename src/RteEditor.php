@@ -92,7 +92,26 @@ class RteEditor extends Backend
             $this->objAjax->executePostActions($objDca);
         }
 
-        $partial = new BackendTemplate('be_rte_table_editor');
+        // Contao 4 compatibility
+        if (version_compare(VERSION,'4.4','>=')) {
+            $fileBrowserTypes = array();
+            $pickerBuilder = \System::getContainer()->get('contao.picker.builder');
+
+            foreach (array('file' => 'image', 'link' => 'file') as $context => $fileBrowserType)
+            {
+                if ($pickerBuilder->supportsContext($context))
+                {
+                    $fileBrowserTypes[] = $fileBrowserType;
+                }
+            }
+
+            /** @var BackendTemplate|object $partial */
+            $partial = new \BackendTemplate('be_rte_table_editor_contao4');
+            $partial->selector = 'ctrl_' . $this->strInputName;
+            $partial->fileBrowserTypes = $fileBrowserTypes;
+        } else {
+            $partial = new BackendTemplate('be_rte_table_editor');
+        }
 
         $template->isPopup  = true;
         $template->main     = $partial->parse();
