@@ -26,7 +26,14 @@ setTimeout(function() {
       editor.on('focus', function() { Backend.getScrollOffset(); });
     },
     file_browser_callback: function(field_name, url, type, win) {
-      Backend.openModalBrowser(field_name, url, type, win);
+        Backend.openModalSelector({
+            'id': 'tl_listing',
+            'title': win.document.getElement('div.mce-title').get('text'),
+            'url': '/contao/picker?context=' + (type == 'file' ? 'link' : 'file') + '&amp;extras[fieldType]=radio&amp;extras[filesOnly]=true&amp;extras[source]=<?= $this->source ?>&amp;value=' + url + '&amp;popup=1',
+            'callback': function(table, value) {
+                win.document.getElementById(field_name).value = value.join(',');
+            }
+        });
     },
     file_browser_callback_types: <?= json_encode($this->fileBrowserTypes) ?>,
     plugins: 'autosave charmap code fullscreen image importcss link lists paste searchreplace stripnbsp tabfocus table visualblocks',
