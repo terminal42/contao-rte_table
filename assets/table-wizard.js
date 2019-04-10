@@ -26,7 +26,10 @@ var RteTableWizard = {
                     var content = opt.el.getNext('.rte-content').get('html');
 
                     frm.document.getElementById('rte-table-editor').set('value', content);
-                    frm.tinyMCE.activeEditor.setContent(content);
+
+                    setTimeout(function () {
+                        frm.tinyMCE.activeEditor.setContent(content);
+                    }, 100);
 
                     M.buttons.forEach(function(button) {
                         button.classList.remove('btn-disabled');
