@@ -122,6 +122,9 @@ class RteEditor extends Backend
         $template->charset  = Config::get('characterSet');
 
         Config::set('debugMode', false);
-        $template->output();
+
+        header('Content-Type: text/html; charset=' . Config::get('characterSet'));
+        echo $template->parse();
+        exit;
     }
 }
