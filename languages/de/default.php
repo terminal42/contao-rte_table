@@ -12,4 +12,4 @@
 /**
  * Table table wizard
  */
-$GLOBALS['TL_LANG']['MSC']['rte_table_wizard.edit'] = 'Edit content';
+$GLOBALS['TL_LANG']['MSC']['rte_table_wizard.edit'] = 'Zelleninhalt bearbeiten';
