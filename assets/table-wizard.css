@@ -52,6 +52,12 @@
     display: none;
 }
 
+/* Hide some buttons that do not work with this bundle */
+.widget h3 img[src$="demagnify.svg"][onclick="Backend.tableWizardResize(0.9)"],
+.widget h3 img[src$="magnify.svg"][onclick="Backend.tableWizardResize(1.1)"] {
+    display: none;
+}
+
 /* Contao 4 */
 body[class*="version_4"] .rte-table-wizard .tcontainer {
     width: 148px;
