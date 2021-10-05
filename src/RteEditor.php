@@ -107,6 +107,7 @@ class RteEditor extends Backend
 
             /** @var BackendTemplate|object $partial */
             $partial = new \BackendTemplate('be_rte_table_editor_contao4');
+            $partial->selector = 'rte-table-editor';
             $partial->fileBrowserTypes = $fileBrowserTypes;
             $partial->source = $strTable . '.' . CURRENT_ID;
         } else {
