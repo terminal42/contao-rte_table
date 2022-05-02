@@ -16,6 +16,7 @@ use Contao\Backend;
 use Contao\BackendTemplate;
 use Contao\Config;
 use Contao\Controller;
+use Contao\DataContainer;
 use Contao\Environment;
 use Contao\Input;
 use Contao\Model;
@@ -69,7 +70,7 @@ class RteEditor extends Backend
         define('CURRENT_ID', (Input::get('table') ? $this->Session->get('CURRENT_ID') : Input::get('id')));
 
         Controller::loadDataContainer($strTable);
-        $strDriver     = 'DC_'.$GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
+        $strDriver     = method_exists(DataContainer::class, 'getDriverForTable') ? DataContainer::getDriverForTable($strTable) : 'DC_'.$GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
         $objDca        = new $strDriver($strTable);
         $objDca->field = $strField;
 
