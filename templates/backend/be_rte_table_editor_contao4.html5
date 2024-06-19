@@ -1,4 +1,0 @@
-<?php $this->insert('be_tinyMCE', $this->arrData); ?>
-<div style="margin:10px auto;max-width:calc(100% - 20px);">
-    <textarea id="<?= $this->selector ?>" style="visibility: hidden;"></textarea>
-</div>

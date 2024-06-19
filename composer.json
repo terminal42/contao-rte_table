@@ -2,7 +2,7 @@
     "name": "terminal42/contao-rte_table",
     "description": "Use tinyMCE (or in future maybe other Rich Text Editors) for every cell in the Contao table content element",
     "keywords": ["contao", "table", "rte", "tinymce"],
-    "type": "contao-module",
+    "type": "contao-bundle",
     "license": "LGPL-3.0+",
     "authors": [
         {
@@ -25,20 +25,37 @@
         "source": "https://github.com/terminal42/contao-rte_table"
     },
     "require": {
-        "php": "^5.4.0 || ^7.0 || ^8.0",
-        "contao/core-bundle": "^3.5 || ^4.4",
-        "contao-community-alliance/composer-plugin": "^2.4.0 || 3.*"
+        "php": "^8.1",
+        "contao/core-bundle": "^5.3",
+        "symfony/config": "^6.4 || ^7.0",
+        "symfony/dependency-injection": "^6.4 || ^7.0",
+        "symfony/framework-bundle": "^6.4 || ^7.0",
+        "symfony/http-foundation": "^6.4 || ^7.0",
+        "symfony/http-kernel": "^6.4 || ^7.0",
+        "symfony/routing": "^6.4 || ^7.0",
+        "symfony/translation-contracts": "^2.0 || ^3.0"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0",
+        "terminal42/contao-build-tools": "dev-main"
+    },
+    "conflict": {
+        "contao/manager-plugin": "<2.0 || >=3.0"
     },
     "autoload": {
         "psr-4": {
-            "Terminal42\\RteTable\\": "src/"
+            "Terminal42\\RteTableBundle\\": "src/"
         }
     },
     "extra": {
-        "contao": {
-            "sources": {
-                "": "system/modules/rte_table"
-            }
+        "contao-manager-plugin": "Terminal42\\RteTableBundle\\ContaoManager\\Plugin"
+    },
+    "config": {
+        "allow-plugins": {
+            "contao-components/installer": false,
+            "php-http/discovery": false,
+            "contao/manager-plugin": false,
+            "terminal42/contao-build-tools": true
         }
     }
 }

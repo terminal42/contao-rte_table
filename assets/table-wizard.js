@@ -1,63 +1,110 @@
-var RteTableWizard = {
-    edit: function (options) {
-        var opt = options || {},
-            max = (window.getSize().y - 180).toInt();
-        if (!opt.height || opt.height > max) opt.height = max;
-        var M = new SimpleModal({
-            'width': opt.width,
-            'btn_ok': Contao.lang.close,
-            'draggable': false,
-            'overlayOpacity': .5,
-            'onShow': function () {
-                document.body.setStyle('overflow', 'hidden');
-            },
-            'onHide': function () {
-                document.body.setStyle('overflow', 'auto');
-            },
-            'onAppend': function () {
-                var frm = window.frames['simple-modal-iframe'];
+import './table-wizard.scss';
 
-                if (frm === undefined) {
-                    alert('Could not find the SimpleModal frame');
-                    return;
-                }
+const initializedCells = new WeakMap();
 
-                frm.onload = function () {
-                    var content = opt.el.getNext('.rte-content').get('html');
+const init = (cell) => {
+    // Check if this cell has already been initialized
+    if (initializedCells.has(cell)) {
+        return;
+    }
 
-                    frm.document.getElementById('rte-table-editor').set('value', content);
+    initializedCells.set(cell, true);
 
-                    setTimeout(function () {
-                        frm.tinyMCE.activeEditor.setContent(content);
-                    }, 100);
+    cell.closest('table').classList.add('rte-table-wizard');
 
-                    M.buttons.forEach(function(button) {
-                        button.classList.remove('btn-disabled');
-                    });
-                };
-            }
-        });
-        M.addButton(Contao.lang.apply, 'btn primary', function () {
-            var frm = window.frames['simple-modal-iframe'];
+    const link = cell.querySelector('button') || document.createElement('button');
+    const content = cell.querySelector('div') || document.createElement('div');
+    const textarea = cell.querySelector('textarea');
+
+    link.type = 'button';
+    link.className = 'tl_submit rte-edit';
+    link.innerText = cell.closest('#tl_tablewizard').dataset.rteLabel;
+    link.addEventListener('click', () => click(content, textarea));
+
+    content.className = 'rte-content'
+    content.innerHTML = textarea.value;
+
+    cell.prepend(link, content);
+    cell.querySelector('textarea').style.display = 'none';
+};
+
+const click = (contentEl, textareaEl) => {
+    const url = textareaEl.closest('#tl_tablewizard').dataset.rteUrl;
+    const M = new SimpleModal({
+        width: '80vw',
+        draggable: false,
+        overlayOpacity: .5,
+        onShow: function () {
+            document.body.style.overflow = 'hidden';
+        },
+        onHide: function () {
+            document.body.style.overflow = '';
+        },
+        onAppend: function () {
+            const frm = window.frames['simple-modal-iframe'];
 
             if (frm === undefined) {
                 alert('Could not find the SimpleModal frame');
                 return;
             }
 
-            var content = frm.tinyMCE.activeEditor.getContent();
+            frm.onload = function () {
+                frm.document.getElementById('rte-table-editor').value = contentEl.innerHTML;
 
-            // Set the content to textarea
-            opt.el.getNext('textarea').set('value', content);
+                setTimeout(function () {
+                    frm.tinyMCE.activeEditor.setContent(contentEl.innerHTML);
+                }, 100);
 
-            // Update the content value
-            opt.el.getNext('.rte-content').set('html', content);
+                M.buttons.forEach(function(button) {
+                    button.classList.remove('btn-disabled');
+                });
+            };
+        }
+    });
+    M.addButton(Contao.lang.cancel, 'btn', function () {
+        this.hide();
+    });
+    M.addButton(Contao.lang.apply, 'btn primary', function () {
+        const frm = window.frames['simple-modal-iframe'];
 
-            this.hide();
-        });
-        M.show({
-            'title': opt.title,
-            'contents': '<iframe src="' + opt.url + '" name="simple-modal-iframe" width="100%" height="' + opt.height + '" frameborder="0"></iframe>'
-        });
-    }
+        if (frm === undefined) {
+            alert('Could not find the SimpleModal frame');
+            return;
+        }
+
+        const content = frm.tinyMCE.activeEditor.getContent();
+
+        textareaEl.value = content;
+        contentEl.innerHTML = content;
+
+        this.hide();
+    });
+    M.show({
+        'model': 'modal',
+        'title': textareaEl.closest('#tl_tablewizard').dataset.rteLabel,
+        'contents': `<iframe src="${url}" name="simple-modal-iframe" width="100%" height="${window.innerHeight * 0.8}" frameborder="0"></iframe>`
+    });
 };
+
+document.querySelectorAll('#tl_tablewizard .tcontainer').forEach(init);
+
+new MutationObserver(function(mutationsList) {
+    for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+            mutation.addedNodes.forEach(function(element) {
+                console.log(element);
+                if (element.matches && element.matches('#tl_tablewizard .tcontainer')) {
+                    init(element);
+                } else if (element.matches && element.matches('#tl_tablewizard *')) {
+                    element.querySelectorAll('.tcontainer').forEach((el) => {
+                        init(el);
+                    })
+                }
+            })
+        }
+    }
+}).observe(document, {
+    attributes: false,
+    childList: true,
+    subtree: true
+});

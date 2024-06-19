@@ -1,0 +1,19 @@
+{
+    "name": "@terminal42/contao-rte_table",
+    "description": "Use tinyMCE (or in future maybe other Rich Text Editors) for every cell in the Contao table content element",
+    "author": "terminal42 gmbh <info@terminal42.ch>",
+    "license": "LGPL-3.0+",
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "devDependencies": {
+        "@terminal42/contao-build-tools": "./vendor/terminal42/contao-build-tools/webpack"
+    },
+    "browserslist": [
+        "defaults"
+    ],
+    "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+}

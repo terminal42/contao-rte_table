@@ -1,0 +1,12 @@
+{
+  "entrypoints": {
+    "table-wizard": {
+      "css": [
+        "/bundles/terminal42rtetable/table-wizard.a9efeeba.css"
+      ],
+      "js": [
+        "/bundles/terminal42rtetable/table-wizard.3362f8bc.js"
+      ]
+    }
+  }
+}

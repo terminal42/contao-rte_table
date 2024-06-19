@@ -1,0 +1,56 @@
+.rte-table-wizard {
+    .rte-content {
+        box-sizing: border-box;
+        width: 148px;
+        height: 78px;
+        padding: 5px;
+        overflow: hidden;
+        background: var(--form-bg);
+        border: 1px solid var(--form-border);
+        border-radius: 2px;
+
+        ul {
+            margin: initial;
+            padding: 0 0 0 2em;
+            list-style: initial;
+        }
+
+        ul li {
+            list-style: initial;
+        }
+    }
+
+    .tcontainer {
+        position: relative;
+        width: 148px;
+        height: 78px;
+        padding: 2px;
+        vertical-align: top;
+    }
+
+    .rte-edit {
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        opacity: 0;
+        transition: opacity 0.2s;
+        inset: 3px;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .tl_textarea {
+        display: none;
+    }
+}
+
+/* Hide resize buttons that do not work with this bundle */
+.widget h3 img[src$='demagnify.svg'][onclick='Backend.tableWizardResize(0.9)'],
+.widget h3 img[src$='magnify.svg'][onclick='Backend.tableWizardResize(1.1)'] {
+    display: none;
+}
