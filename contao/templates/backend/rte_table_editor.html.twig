@@ -1,0 +1,8 @@
+{% extends '@Contao/be_main' %}
+
+{% block main %}
+    <div style="margin:10px auto;max-width:calc(100% - 20px);">
+        <textarea id="{{ selector }}" style="visibility: hidden;"></textarea>
+    </div>
+    {{ rte|raw }}
+{% endblock %}
