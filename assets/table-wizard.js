@@ -88,11 +88,14 @@ const click = (contentEl, textareaEl) => {
 
 document.querySelectorAll('#tl_tablewizard .tcontainer').forEach(init);
 
+window.addEventListener('turbo:render', () => {
+    document.querySelectorAll('#tl_tablewizard .tcontainer').forEach(init);
+})
+
 new MutationObserver(function(mutationsList) {
     for (const mutation of mutationsList) {
         if (mutation.type === 'childList') {
             mutation.addedNodes.forEach(function(element) {
-                console.log(element);
                 if (element.matches && element.matches('#tl_tablewizard .tcontainer')) {
                     init(element);
                 } else if (element.matches && element.matches('#tl_tablewizard *')) {
