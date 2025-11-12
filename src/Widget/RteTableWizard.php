@@ -36,7 +36,7 @@ class RteTableWizard extends TableWizard
 
         return str_replace(
             '<div id="tl_tablewizard">',
-            sprintf(
+            \sprintf(
                 '<div id="tl_tablewizard" data-rte-url="%s" data-rte-label="%s">',
                 $container->get('uri_signer')->sign($url),
                 StringUtil::specialchars($GLOBALS['TL_LANG']['MSC']['rte_table_edit']),

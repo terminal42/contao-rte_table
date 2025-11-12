@@ -52,6 +52,9 @@ class RteEditorController extends AbstractBackendController
         ]);
     }
 
+    /**
+     * @return array<string>
+     */
     private function getFileBrowserTypes(): array
     {
         $fileBrowserTypes = [];
