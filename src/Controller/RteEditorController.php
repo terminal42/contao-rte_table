@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Terminal42\RteTableBundle\Controller;
 
+use Contao\Backend;
 use Contao\BackendTemplate;
 use Contao\Controller;
 use Contao\CoreBundle\Controller\AbstractBackendController;
@@ -44,11 +45,15 @@ class RteEditorController extends AbstractBackendController
         $template->selector = 'rte-table-editor';
         $template->fileBrowserTypes = implode(' ', $this->getFileBrowserTypes());
         $template->source = $table.'.'.$id;
+        $template->theme = Backend::getTheme();
+        $template->enableTinyMce = true;
+        $template->tinyMceLanguage = Backend::getTinyMceLanguage();
 
         return $this->render('@Contao/backend/rte_table_editor.html.twig', [
             'selector' => 'rte-table-editor',
             'rte' => $template->parse(),
             'isPopup' => true,
+            'renderMainOnly' => true,
         ]);
     }
 
