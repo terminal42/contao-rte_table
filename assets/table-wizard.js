@@ -80,6 +80,15 @@ const init = (cell) => {
     content.className = 'rte-content';
     content.innerHTML = textarea.value;
 
+    // The textarea is hidden, so these events cannot come from the user typing - they are
+    // dispatched by other scripts writing to the cell (e.g. a machine translation button).
+    // Without re-rendering, such a value would be submitted but stay invisible to the editor.
+    ['input', 'change'].forEach((eventName) => {
+        textarea.addEventListener(eventName, () => {
+            content.innerHTML = textarea.value;
+        });
+    });
+
     cell.prepend(link, content);
     cell.querySelector('textarea').style.display = 'none';
 };
